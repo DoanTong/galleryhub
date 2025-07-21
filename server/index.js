@@ -1,26 +1,40 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
+import express from "express"
+import dotenv from "dotenv"
+import cors from "cors"
+import cookieParser from "cookie-parser"
+import mongoose from "mongoose"
+import authRoutes from "./routes/AuthRoutes.js"
+import setupSocket from "./socket.js"
 
-import marketplaceRoutes from './routes/marketplace.js';
-import tipRoutes from './routes/tip.js';
-import rewardsRoutes from './routes/rewards.js';
 
 dotenv.config();
+
 const app = express();
-app.use(cors());
+const port = process.env.PORT || 3001;
+const databaseURL = process.env.DATABASE_URL;
+
+app.use(cors({
+    origin: [process.env.ORIGIN],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+})
+);
+
+
+app.use("/uploads/profiles", express.static("uploads/profiles"))
+app.use("/uploads/files", express.static("uploads/files"))
+
+
+app.use(cookieParser());
 app.use(express.json());
 
-// Connect MongoDB
-mongoose.connect(process.env.MONGO_URI);
+app.use('/api/auth', authRoutes);
 
+const server = app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`)
+});
+setupSocket(server)
 
-// API routes
-app.use('/api/marketplace', marketplaceRoutes);
-app.use('/api/tip', tipRoutes);
-app.use('/api/rewards', rewardsRoutes);
-
-// Server start
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+mongoose
+    .connect(databaseURL)
+    .then(() => console.log("DB Connection Successfull.")).catch(err => console.log(err.message)); 

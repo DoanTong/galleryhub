@@ -6,13 +6,13 @@ const LeftBar = () => {
   return (
     <div className="leftBar">
       <div className="menuIcons">
-        <a href="/" className="menuIcon">
+        <a href="/chat" className="menuIcon">
           <img src="/general/logo.png" alt="" className="logo"/>
         </a>
-        <a href="/" className="menuIcon">
+        <a href="/chat" className="menuIcon">
           <img src="/general/home.svg" alt="" />
         </a>
-        <a href="/" className="menuIcon">
+        <a href="/chat/create" className="menuIcon">
           <img src="/general/create.svg" alt="" />
         </a>
         <a href="/" className="menuIcon">

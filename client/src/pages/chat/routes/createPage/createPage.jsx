@@ -2,7 +2,7 @@ import './createPage.css'
 
 const CreatePage = () => {
   return (
-    <div>MyComponent</div>
+    <div>CreatePage</div>
   )
 }
 

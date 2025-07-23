@@ -3,7 +3,9 @@ import './authPage.css'
 
 const AuthPage = () => {
   return (
-    <Gallery/>
+    <div className="authPage">
+      Authpage
+    </div>
   )
 }
 

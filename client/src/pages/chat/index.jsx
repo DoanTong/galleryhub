@@ -28,13 +28,13 @@ const Chat = () => {
   },[userInfo, navigate]);
   
   return <div >
-    <div className='app'>
+    {/* <div className='app'>
       <LeftBar/>
       <div className="content">
         <TopBar/>
         <Gallery/>
       </div>
-    </div>
+    </div> */}
   </div>
   };
   

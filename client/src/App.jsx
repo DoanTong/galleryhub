@@ -8,16 +8,15 @@ import Auth from './pages/auth';
 import Profile from './pages/profile';
 
 // ⚠️ Import MainLayout và các route con
-import MainLayout from './pages/chat/mainLayout/MainLayout';
+import MainLayout from './pages/home/mainLayout/MainLayout';
 
-import CreatePage from './pages/chat/routes/createPage/createPage';
-import PostPage from './pages/chat/routes/postPage/postPage';
-import Homepage from './pages/chat/routes/homepage/homepage';
-import MainChat from './pages/chat/routes/mainChat';
-import Chat from './pages/chat';
-import AuthPage from './pages/chat/routes/authPage/authPage';
-import ProfilePage from './pages/chat/routes/profilePage/profilePage';
-import SearchPage from './pages/chat/routes/searchPage/searchPage';
+import CreatePage from './pages/home/routes/createPage/createPage';
+import PostPage from './pages/home/routes/postPage/postPage';
+import Homepage from './pages/home/routes/homepage/homepage';
+import Home from './pages/home';
+import AuthPage from './pages/home/routes/authPage/authPage';
+import ProfilePage from './pages/home/routes/profilePage/profilePage';
+import SearchPage from './pages/home/routes/searchPage/searchPage';
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useAppStore();
@@ -28,7 +27,7 @@ const PrivateRoute = ({ children }) => {
 const AuthRoute = ({ children }) => {
   const { userInfo } = useAppStore();
   const isAuthenticated = !!userInfo;
-  return isAuthenticated ? <Navigate to="/chat" /> : children;
+  return isAuthenticated ? <Navigate to="/home" /> : children;
 };
 
 const App = () => {
@@ -76,7 +75,7 @@ const App = () => {
           </PrivateRoute>
         } />
 
-        <Route path="/chat" element={
+        <Route path="/home" element={
           <PrivateRoute>
             <MainLayout />
           </PrivateRoute>

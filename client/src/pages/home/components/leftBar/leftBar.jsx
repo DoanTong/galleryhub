@@ -7,13 +7,13 @@ const LeftBar = () => {
   return (
     <div className="leftBar">
       <div className="menuIcons">
-        <a href="/chat" className="menuIcon">
+        <a href="/home" className="menuIcon">
           <Image path="/general/logo.png" alt="" className="logo"/>
         </a>
-        <a href="/chat" className="menuIcon">
+        <a href="/home" className="menuIcon">
           <Image path="/general/home.svg" alt="" />
         </a>
-        <a href="/chat/create" className="menuIcon">
+        <a href="/home/create" className="menuIcon">
           <Image path="/general/create.svg" alt="" />
         </a>
         <a href="/" className="menuIcon">

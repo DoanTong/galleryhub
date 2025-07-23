@@ -1,6 +1,7 @@
 import GalleryItem from "../galleryItem/galleryItem";
 import "./gallery.css";
 
+
 // TEMPORARY
 const items = [
   {

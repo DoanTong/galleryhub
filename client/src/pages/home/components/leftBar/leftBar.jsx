@@ -1,5 +1,5 @@
 // import Image from "../image/image";
-// import {Link} from "react-router";
+import {Link} from "react-router-dom";
 import Image from "../image/image";
 import "./leftBar.css";
 
@@ -7,26 +7,26 @@ const LeftBar = () => {
   return (
     <div className="leftBar">
       <div className="menuIcons">
-        <a href="/home" className="menuIcon">
+        <Link to="/home" className="menuIcon">
           <Image path="/general/logo.png" alt="" className="logo"/>
-        </a>
-        <a href="/home" className="menuIcon">
+        </Link>
+        <Link to="/home" className="menuIcon">
           <Image path="/general/home.svg" alt="" />
-        </a>
-        <a href="/home/create" className="menuIcon">
+        </Link>
+        <Link to="/home/create" className="menuIcon">
           <Image path="/general/create.svg" alt="" />
-        </a>
-        <a href="/" className="menuIcon">
+        </Link>
+        <Link to="/" className="menuIcon">
           <Image path="/general/updates.svg" alt="" />
-        </a>
-        <a href="/" className="menuIcon">
+        </Link>
+        <Link to="/" className="menuIcon">
           <Image path="/general/messages.svg" alt="" />
-        </a>
+        </Link>
       </div>
-      <a href="/" className="menuIcon">
+      <Link to="/" className="menuIcon">
           <Image path="/general/settings.svg" alt="" />
-        </a>
-        
+        </Link>
+
     </div>
   );
 };

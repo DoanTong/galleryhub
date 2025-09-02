@@ -4,7 +4,7 @@ import './authPage.css'
 const AuthPage = () => {
   return (
     <div className="authPage">
-      Authpage
+      
     </div>
   )
 }

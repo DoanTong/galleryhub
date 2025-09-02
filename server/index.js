@@ -5,6 +5,10 @@ import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
 import authRoutes from "./routes/AuthRoutes.js"
 import setupSocket from "./socket.js"
+import userRouter from "./routes/UserRoute.js"
+import pinRouter from "./routes/PinRoute.js"
+import commentRouter from "./routes/CommentRoute.js"
+import boardRouter from "./routes/BoardRoute.js"
 
 
 dotenv.config();
@@ -34,6 +38,19 @@ const server = app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`)
 });
 setupSocket(server)
+
+// GALLERYHUB
+app.listen(port, () => {
+    console.log("This is Server of GalleryHub");
+});
+
+app.use("/users", userRouter)
+app.use("/pins", pinRouter)
+app.use("/comments", commentRouter)
+app.use("/boards", boardRouter)
+
+
+
 
 mongoose
     .connect(databaseURL)

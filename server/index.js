@@ -1,57 +1,39 @@
-import express from "express"
-import dotenv from "dotenv"
-import cors from "cors"
-import cookieParser from "cookie-parser"
-import mongoose from "mongoose"
-import authRoutes from "./routes/AuthRoutes.js"
-import setupSocket from "./socket.js"
-import userRouter from "./routes/UserRoute.js"
-import pinRouter from "./routes/PinRoute.js"
-import commentRouter from "./routes/CommentRoute.js"
-import boardRouter from "./routes/BoardRoute.js"
 
-
+import dotenv from "dotenv";
 dotenv.config();
+import express from "express";
+import cors from "cors";
+import userRouter from "./routes/user.route.js";
+import pinRouter from "./routes/pin.route.js";
+import commentRouter from "./routes/comment.route.js";
+import boardRouter from "./routes/board.route.js";
+import connectDB from "./utils/connectDB.js";
+import cookieParser from "cookie-parser";
+import fileUpload from "express-fileupload";
 
 const app = express();
-const port = process.env.PORT || 3001;
-const databaseURL = process.env.DATABASE_URL;
 
-app.use(cors({
-    origin: [process.env.ORIGIN],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-})
-);
-
-
-app.use("/uploads/profiles", express.static("uploads/profiles"))
-app.use("/uploads/files", express.static("uploads/files"))
-
-
-app.use(cookieParser());
 app.use(express.json());
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cookieParser());
+app.use(fileUpload());
 
-app.use('/api/auth', authRoutes);
+app.use("/users", userRouter);
+app.use("/pins", pinRouter);
+app.use("/comments", commentRouter);
+app.use("/boards", boardRouter);
 
-const server = app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`)
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+
+  res.json({
+    message: error.message || "Something went wrong!",
+    status: error.status,
+    stack: error.stack,
+  });
 });
-setupSocket(server)
 
-// GALLERYHUB
-app.listen(port, () => {
-    console.log("This is Server of GalleryHub");
+app.listen(process.env.PORT || 3000, () => {
+  connectDB();
+  console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });
-
-app.use("/users", userRouter)
-app.use("/pins", pinRouter)
-app.use("/comments", commentRouter)
-app.use("/boards", boardRouter)
-
-
-
-
-mongoose
-    .connect(databaseURL)
-    .then(() => console.log("DB Connection Successfull.")).catch(err => console.log(err.message)); 

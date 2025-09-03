@@ -31,40 +31,50 @@ const UserButton = () => {
   };
 
   const handleConnectWallet = async () => {
-    if (!window.ethereum) {
-      alert("Cần cài MetaMask!");
-      return;
+  if (!window.ethereum) {
+    alert("Cần cài MetaMask!");
+    return;
+  }
+
+  try {
+    // 1. Lấy address từ MetaMask
+    const [address] = await window.ethereum.request({ method: "eth_requestAccounts" });
+    console.log("MetaMask address:", address);
+
+    // 2. Lấy nonce từ server
+    const nonceRes = await apiRequest.get("/users/wallet-nonce");
+    console.log("Nonce from server:", nonceRes.data);
+    const nonce = nonceRes.data.nonce;
+
+    // 3. Ký message
+    const message = `Sign this message to link wallet: ${nonce}`;
+    const signature = await window.ethereum.request({
+      method: "personal_sign",
+      params: [message, address],
+    });
+    console.log("Signature:", signature);
+
+    // 4. Gửi verify wallet
+    console.log("Sending verify-wallet request...");
+    const verifyRes = await apiRequest.post(
+      "/users/verify-wallet",
+      { address, signature },
+      { withCredentials: true } // quan trọng để gửi cookie
+    );
+    console.log("verify-wallet response:", verifyRes.data);
+
+    if (verifyRes.data?.message === "Wallet verified successfully") {
+      setWalletAddress(address);
+      alert("Kết nối ví thành công!");
+    } else {
+      alert(verifyRes.data?.message || "Lỗi khi kết nối ví");
     }
+  } catch (err) {
+    console.error("Error in handleConnectWallet:", err);
+    alert("Kết nối ví thất bại");
+  }
+};
 
-    try {
-      // 1. Lấy address từ MetaMask
-      const [address] = await window.ethereum.request({ method: "eth_requestAccounts" });
-
-      // 2. Lấy nonce từ server
-      const nonceRes = await apiRequest.get("/users/wallet-nonce");
-      const nonce = nonceRes.data.nonce;
-
-      // 3. Ký message bằng MetaMask
-      const message = `Sign this message to link wallet: ${nonce}`;
-      const signature = await window.ethereum.request({
-        method: "personal_sign",
-        params: [message, address],
-      });
-
-      // 4. Gửi address + signature để verify
-      const verifyRes = await apiRequest.post("/users/verify-wallet", { address, signature });
-
-      if (verifyRes.data?.message === "Wallet verified successfully") {
-        setWalletAddress(address);
-        alert("Kết nối ví thành công!");
-      } else {
-        alert(verifyRes.data?.message || "Lỗi khi kết nối ví");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Kết nối ví thất bại");
-    }
-  };
 
   const renderWalletButton = () => {
     if (walletAddress) {

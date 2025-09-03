@@ -26,7 +26,7 @@
   border-radius: 16px;
 }
 
-.galleryItem:hover .saveButton {
+/* .galleryItem:hover .saveButton {
   display: block;
   background-color: #e50829;
   color: white;
@@ -39,7 +39,7 @@
   top: 16px;
   right: 16px;
   border: none;
-}
+} */
 
 .galleryItem:hover .overlayIcons {
   display: block;
@@ -70,4 +70,32 @@
 
 .overlayIcons button:hover {
   background-color: #f1f1f1;
+}
+.overlayIcons {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  z-index: 2; /* để button luôn trên item */
+}
+
+.dropdownMenuFloating {
+  position: absolute; /* nằm trên body, không bị cắt */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 140px;
+  padding: 4px 0;
+  z-index: 9999;
+}
+
+.dropdownItem {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
 }

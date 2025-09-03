@@ -29,7 +29,8 @@ export const getPins = async (req, res) => {
       : {}
   )
     .limit(LIMIT)
-    .skip(pageNumber * LIMIT);
+    .skip(pageNumber * LIMIT)
+    .populate("user", "_id username displayName");
 
   const hasNextPage = pins.length === LIMIT;
 

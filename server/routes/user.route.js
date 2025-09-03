@@ -4,10 +4,13 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  followUser
+  followUser,
+  connectWallet,
+  requestWalletNonce,
+  verifyWallet
 } from "../controllers/user.controller.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
-import { connectWallet, requestWalletNonce, verifyWallet } from "../controllers/user.controller.js";
+
 
 const router = express.Router();
 

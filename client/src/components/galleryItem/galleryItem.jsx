@@ -16,12 +16,12 @@ const GalleryItem = ({ item, onDelete }) => {
   const optimizedHeight = (372 * item.height) / item.width;
 
   // Xác định owner
-console.log("Gallery item:", item);
+// console.log("Gallery item:", item);
 const ownerId = item.user?._id || item.owner || item.ownerId;
-console.log("OwnerId resolved:", ownerId);
+// console.log("OwnerId resolved:", ownerId);
   const isOwner = currentUser ? String(currentUser._id) === String(ownerId) : false;
 
-  console.log("Owner ID:", ownerId, "CurrentUser ID:", currentUser?._id, "isOwner:", isOwner);
+  // console.log("Owner ID:", ownerId, "CurrentUser ID:", currentUser?._id, "isOwner:", isOwner);
 
   const toggleDropdown = () => {
     if (buttonRef.current) {
@@ -100,9 +100,9 @@ console.log("OwnerId resolved:", ownerId);
 
   // Nếu user chưa load xong, không render gallery item
   if (!currentUser) return null;
-console.log("Gallery item:", item); // xem toàn bộ dữ liệu
-  console.log("Owner wallet in GalleryItem:", item.user?.walletAddress); // xem địa chỉ ví
-  console.log("Owner ID:", ownerId, "CurrentUser ID:", currentUser?._id, "isOwner:", isOwner);
+// console.log("Gallery item:", item); // xem toàn bộ dữ liệu
+//   console.log("Owner wallet in GalleryItem:", item.user?.walletAddress); // xem địa chỉ ví
+//   console.log("Owner ID:", ownerId, "CurrentUser ID:", currentUser?._id, "isOwner:", isOwner);
   return (
     <div className="galleryItem" style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}>
       <Image path={item.media} alt="" w={372} h={optimizedHeight} />

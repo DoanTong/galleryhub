@@ -14,3 +14,4 @@ const Editor = ({ previewImg }) => {
 };
 
 export default Editor;
+

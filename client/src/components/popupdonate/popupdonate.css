@@ -1,0 +1,77 @@
+.popupOverlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.popupContent {
+  background: linear-gradient(145deg, #2a2a3d, #1f1f2f);
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 400px;
+  max-width: 90%;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.5);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.popupContent h3 {
+  margin-bottom:20px;
+  color:#10b981;
+}
+
+.donateBody label {
+  display:block;
+  text-align:left;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+.donateBody input, .donateBody textarea {
+  width:100%;
+  padding:8px 10px;
+  border-radius:8px;
+  border:none;
+  margin-top:5px;
+  font-size:1rem;
+  resize: none;
+}
+
+.donateStatus {
+  margin-top:10px;
+  font-weight:600;
+}
+
+.donateStatus.pending { color:#fbbf24; }
+.donateStatus.confirmed { color:#10b981; }
+.donateStatus.failed { color:#ef4444; }
+
+.popupButtons {
+  margin-top:20px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.confirmBtn {
+  background-color:#10b981;
+  color:#fff;
+  padding:8px 20px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+}
+
+.closeBtn {
+  background-color:#4b5563;
+  color:#fff;
+  padding:8px 20px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+}

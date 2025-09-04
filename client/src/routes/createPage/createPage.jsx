@@ -1,7 +1,7 @@
 import "./createPage.css";
 import IKImage from "../../components/image/image";
 import useAuthStore from "../../utils/authStore";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import Editor from "../../components/editor/editor";
 import useEditorStore from "../../utils/editorStore";
@@ -9,25 +9,27 @@ import apiRequest from "../../utils/apiRequest";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import BoardForm from "./BoardForm";
 
-// FIXED: CHANGE DIRECT REQUEST TO MUTATION
-// const addPost = async (post) => {
-//   const res = await apiRequest.post("/pins", post);
-//   return res.data;
-// };
 const addPost = async (post) => {
   const res = await apiRequest.post("/pins", post, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-    withCredentials: true, // nếu bạn dùng cookie auth
+    withCredentials: true,
   });
   return res.data;
 };
 
+const updatePost = async ({ id, data }) => {
+  const res = await apiRequest.put(`/pins/${id}`, data, {
+    withCredentials: true,
+  });
+  return res.data;
+};
 
 const CreatePage = () => {
   const { currentUser } = useAuthStore();
   const navigate = useNavigate();
+  const { id } = useParams(); // nếu có id => edit mode
   const formRef = useRef();
   const { textOptions, canvasOptions, resetStore } = useEditorStore();
 
@@ -38,16 +40,17 @@ const CreatePage = () => {
     height: 0,
   });
   const [isEditing, setIsEditing] = useState(false);
-  // FIXED: ADD NEW BOARD
   const [newBoard, setNewBoard] = useState("");
   const [isNewBoardOpen, setIsNewBoardOpen] = useState(false);
 
+  // --- Nếu chưa login thì redirect ---
   useEffect(() => {
     if (!currentUser) {
       navigate("/auth");
     }
   }, [navigate, currentUser]);
 
+  // --- Preview file ---
   useEffect(() => {
     if (file) {
       const img = new Image();
@@ -62,12 +65,43 @@ const CreatePage = () => {
     }
   }, [file]);
 
+  // --- Nếu là edit thì fetch pin hiện có ---
+  useEffect(() => {
+    if (id) {
+      const fetchPin = async () => {
+        const res = await apiRequest.get(`/pins/${id}`);
+        if (res.status === 200) {
+          const data = res.data;
+          // gán dữ liệu vào form
+          if (formRef.current) {
+            formRef.current.title.value = data.title || "";
+            formRef.current.description.value = data.description || "";
+            formRef.current.link.value = data.link || "";
+            formRef.current.tags.value = data.tags?.join(", ") || "";
+          }
+          setPreviewImg({
+            url: pin.media,
+            width: data.width,
+            height: data.height,
+          });
+        }
+      };
+      fetchPin();
+    }
+  }, [id]);
 
-  // FIXED: CHANGE DIRECT REQUEST TO MUTATION
-  const mutation = useMutation({
+  // --- Mutations ---
+  const createMutation = useMutation({
     mutationFn: addPost,
     onSuccess: (data) => {
       resetStore();
+      navigate(`/pin/${data._id}`);
+    },
+  });
+
+  const editMutation = useMutation({
+    mutationFn: updatePost,
+    onSuccess: (data) => {
       navigate(`/pin/${data._id}`);
     },
   });
@@ -76,36 +110,38 @@ const CreatePage = () => {
     if (isEditing) {
       setIsEditing(false);
     } else {
-      const formData = new FormData(formRef.current);
-      formData.append("media", file);
-      formData.append("textOptions", JSON.stringify(textOptions));
-      formData.append("canvasOptions", JSON.stringify(canvasOptions));
-      // FIXED: ADD NEW BOARD
-      formData.append("newBoard", newBoard);
-
-      // FIXED: CHANGE DIRECT REQUEST TO MUTATION
-      // try {
-      //   const res = await apiRequest.post("/pins", formData, {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   });
-      //   navigate(`/pin/${res.data._id}`)
-      // } catch (err) {
-      //   console.log(err);
-      // }
-      mutation.mutate(formData);
+      if (id) {
+        // --- EDIT MODE ---
+        const payload = {
+          title: formRef.current.title.value,
+          description: formRef.current.description.value,
+          link: formRef.current.link.value,
+          tags: formRef.current.tags.value
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean),
+          board: formRef.current.board.value || null,
+        };
+        editMutation.mutate({ id, data: payload });
+      } else {
+        // --- CREATE MODE ---
+        const formData = new FormData(formRef.current);
+        formData.append("media", file);
+        formData.append("textOptions", JSON.stringify(textOptions));
+        formData.append("canvasOptions", JSON.stringify(canvasOptions));
+        formData.append("newBoard", newBoard);
+        createMutation.mutate(formData);
+      }
     }
   };
 
-
-  // FIXED: FETCH EXISTING BOARDS
+  // --- Lấy danh sách boards ---
   const { data, isPending, error } = useQuery({
     queryKey: ["formBoards"],
-    queryFn: () => apiRequest.get(`/boards/${currentUser._id}`).then((res) => res.data),
+    queryFn: () =>
+      apiRequest.get(`/boards/${currentUser._id}`).then((res) => res.data),
   });
 
-  // FIXED: ADD NEW BOARD
   const handleNewBoard = () => {
     setIsNewBoardOpen((prev) => !prev);
   };
@@ -113,8 +149,8 @@ const CreatePage = () => {
   return (
     <div className="createPage">
       <div className="createTop">
-        <h1>{isEditing ? "Design your Pin" : "Create Pin"}</h1>
-        <button onClick={handleSubmit}>{isEditing ? "Done" : "Publish"}</button>
+        <h1>{id ? "Edit Pin" : "Create Pin"}</h1>
+        <button onClick={handleSubmit}>{id ? "Update" : "Publish"}</button>
       </div>
       {isEditing ? (
         <Editor previewImg={previewImg} />
@@ -123,9 +159,11 @@ const CreatePage = () => {
           {previewImg.url ? (
             <div className="preview">
               <img src={previewImg.url} alt="" />
-              <div className="editIcon" onClick={() => setIsEditing(true)}>
-                <IKImage path="/general/edit.svg" alt="" />
-              </div>
+              {!id && ( // chỉ cho edit ảnh nếu đang tạo mới
+                <div className="editIcon" onClick={() => setIsEditing(true)}>
+                  <IKImage path="/general/edit.svg" alt="" />
+                </div>
+              )}
             </div>
           ) : (
             <>
@@ -176,17 +214,7 @@ const CreatePage = () => {
                 id="link"
               />
             </div>
-            {/* <div className="createFormItem">
-              <label htmlFor="board">Board</label>
-              <select name="board" id="board">
-                <option value="">Choose a board</option>
-                <option value="1">Board 1</option>
-                <option value="2">Board 2</option>
-                <option value="3">Board 3</option>
-              </select>
-            </div> */}
-            {/* FIXED: SELECT OR ADD BOARD */}
-            {(!isPending || !error) && (
+            {!isPending && !error && (
               <div className="createFormItem">
                 <label htmlFor="board">Board</label>
                 <select name="board" id="board">

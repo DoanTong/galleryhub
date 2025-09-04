@@ -10,6 +10,7 @@ import boardRouter from "./routes/board.route.js";
 import connectDB from "./utils/connectDB.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import donationRoutes from "./routes/donation.route.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/users", userRouter);
 app.use("/pins", pinRouter);
 app.use("/comments", commentRouter);
 app.use("/boards", boardRouter);
+app.use("/donations", donationRoutes);
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);

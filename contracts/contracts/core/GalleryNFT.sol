@@ -3,24 +3,25 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract GalleryNFT is ERC721, ERC721URIStorage, Ownable {
+contract GalleryNFT is ERC721, ERC721URIStorage {
     uint256 private _tokenIdCounter;
 
-    constructor() ERC721("GalleryNFT", "GNFT") Ownable(msg.sender) {}
+    constructor() ERC721("GalleryNFT", "GNFT") {}
 
-    function mintNFT(address to, string memory uri) public onlyOwner returns (uint256) {
+    function mintNFT(string memory uri) public returns (uint256) {
         uint256 tokenId = _tokenIdCounter;
         _tokenIdCounter += 1;
-        _mint(to, tokenId);
+        _mint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
         return tokenId;
     }
 
-    // KHÔNG override _burn()
+    function currentTokenId() public view returns (uint256) {
+        return _tokenIdCounter;
+    }
 
-    // override tokenURI
+    // Override tokenURI
     function tokenURI(uint256 tokenId)
         public
         view
@@ -30,7 +31,7 @@ contract GalleryNFT is ERC721, ERC721URIStorage, Ownable {
         return super.tokenURI(tokenId);
     }
 
-    // override supportsInterface
+    // Override supportsInterface
     function supportsInterface(bytes4 interfaceId)
         public
         view

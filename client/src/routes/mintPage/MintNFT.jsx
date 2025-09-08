@@ -5,63 +5,66 @@ import useAuthStore from "../../utils/authStore";
 import contractABI from "../../artifacts/GalleryNFT.json";
 import "./mintNFT.css";
 
-const CONTRACT_ADDRESS = "0x09833dC5Eae01E532894db73B014b341fCa20565"; // địa chỉ contract đã deploy
+// Địa chỉ contract đã deploy trên Sepolia
+const CONTRACT_ADDRESS = "0x53983a652454551589BD2251684FAe0A830f0697";
 
 const MintNFT = () => {
-  const { id } = useParams(); // id của pin / tranh
+  const { id } = useParams(); // ID của pin
   const navigate = useNavigate();
   const { currentUser } = useAuthStore();
 
   const [loading, setLoading] = useState(false);
   const [txHash, setTxHash] = useState("");
 
-  const handleMint = async () => {
-    if (!window.ethereum) {
-      alert("Bạn cần cài MetaMask!");
-      return;
-    }
+ const handleMint = async () => {
+  if (!window.ethereum) {
+    alert("Bạn cần cài MetaMask!");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      // lấy metadata từ API backend
-      const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/pins/${id}`);
-      const pin = await res.json();
+    // Lấy pin info
+    const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/pins/${id}`);
+    const pin = await res.json();
 
-      // metadata JSON để lưu trên IPFS
-      const metadata = {
-        name: pin.title,
-        description: pin.desc,
-        image: pin.img, // link ảnh
-        artist: currentUser?.username || "unknown",
-      };
+    const metadata = {
+      name: pin.title,
+      description: pin.description,
+      image: pin.media,
+      artist: currentUser?.username || "unknown",
+    };
 
-      // upload metadata JSON lên Pinata/IPFS
-      const uploadRes = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/nft/upload`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(metadata),
-        });
-        const uploadData = await uploadRes.json();
-        const tokenURI = uploadData.uri;
-      // kết nối contract
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+    // Upload metadata lên IPFS
+    const uploadRes = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/nft/upload`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(metadata),
+    });
+    const uploadData = await uploadRes.json();
+    const tokenURI = uploadData.uri;
 
-      // gọi mint
-      const tx = await contract.mintNFT(await signer.getAddress(), tokenURI);
-      await tx.wait();
+    // Kết nối contract
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
 
-      setTxHash(tx.hash);
-      alert("Mint thành công!");
-    } catch (err) {
-      console.error("Mint error:", err);
-      alert("Mint thất bại!");
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Mint cho signer hiện tại
+    const tx = await contract.mintNFT(tokenURI);
+    await tx.wait();
+
+    setTxHash(tx.hash);
+    alert("Mint thành công!");
+  } catch (err) {
+    console.error("Mint error:", err);
+    alert("Mint thất bại!");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="mintPage">

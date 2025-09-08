@@ -11,7 +11,7 @@ import connectDB from "./utils/connectDB.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import donationRoutes from "./routes/donation.route.js";
-
+import nftRoutes from "./routes/nft.js";
 const app = express();
 
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use("/pins", pinRouter);
 app.use("/comments", commentRouter);
 app.use("/boards", boardRouter);
 app.use("/donations", donationRoutes);
-
+app.use("/nft", nftRoutes);
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
 

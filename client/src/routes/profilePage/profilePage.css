@@ -77,3 +77,44 @@
 .active {
   border-bottom: 3px solid black;
 }
+.profilePage .avatarContainer {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+
+.profilePage .profileImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid #ccc;
+}
+
+/* Nút upload avatar overlay */
+.profilePage .avatarUpload {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  line-height: 100%;
+  cursor: pointer;
+  opacity: 0;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profilePage .avatarContainer:hover .avatarUpload {
+  opacity: 1;
+}

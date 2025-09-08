@@ -48,42 +48,43 @@ const ownerId = item.user?._id || item.owner || item.ownerId;
 
 
   // Xử lý menu actions
-  const handleMenuClick = async (action) => {
-    setOpen(false);
+const handleMenuClick = async (action) => {
+  setOpen(false);
 
-    if (action === "Edit") {
-      navigate(`/pin/edit/${item._id}`);
-    } else if (action === "Delete") {
-      if (window.confirm("Bạn có chắc chắn muốn xóa pin này?")) {
-        try {
-          const res = await fetch(
-            `${import.meta.env.VITE_API_ENDPOINT}/pins/${item._id}`,
-            {
-              method: "DELETE",
-              credentials: "include",
-            }
-          );
-
-          if (res.ok) {
-            alert("Xóa thành công!");
-            if (onDelete) onDelete(item._id); // callback để cha cập nhật
-          } else {
-            alert("Xóa thất bại!");
+  if (action === "Edit") {
+    navigate(`/pin/edit/${item._id}`);
+  } else if (action === "Delete") {
+    if (window.confirm("Bạn có chắc chắn muốn xóa pin này?")) {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_ENDPOINT}/pins/${item._id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
           }
-        } catch (err) {
-          console.error("Delete error:", err);
-          alert("Có lỗi xảy ra!");
+        );
+
+        if (res.ok) {
+          alert("Xóa thành công!");
+          if (onDelete) onDelete(item._id); // callback để cha cập nhật
+        } else {
+          alert("Xóa thất bại!");
         }
+      } catch (err) {
+        console.error("Delete error:", err);
+        alert("Có lỗi xảy ra!");
       }
-    }else if (action === "Donate") {
-    setDonatePopupOpen(true); // mở popup
-  }
-     else {
-      console.log(`${action} clicked`);
     }
-  };
+  } else if (action === "Donate") {
+    setDonatePopupOpen(true); // mở popup donate
+  } else if (action === "MintNFT") {
+    navigate(`/mint/${item._id}`); // điều hướng sang trang mint NFT
+  } else {
+    console.log(`${action} clicked`);
+  }
+};
   // Chỉ owner mới hiển thị Edit/Delete
-  const menuItems = isOwner ? ["Edit", "Delete"] : ["Donate", "Report"];
+  const menuItems = isOwner ? ["Edit", "Delete","MintNFT"] : ["Donate", "Report"];
 
   const dropdown = open
     ? ReactDOM.createPortal(

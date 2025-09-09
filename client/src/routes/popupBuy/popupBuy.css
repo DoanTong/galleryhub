@@ -1,0 +1,116 @@
+/* src/routes/popupBuy/popupBuy.css */
+.popupBuy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popupBuy__card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 380px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.25s ease;
+}
+
+.popupBuy__card h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+}
+
+.popupBuy__card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.popupBuy__card label {
+  display: block;
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.popupBuy__card input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.popupBuy__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.popupBuy__actions button {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.popupBuy__actions button:first-child {
+  background: #4cafef;
+  color: #fff;
+}
+
+.popupBuy__actions button:first-child:hover {
+  background: #399edd;
+}
+
+.popupBuy__actions button:last-child {
+  background: #eee;
+  color: #333;
+}
+
+.popupBuy__actions button:last-child:hover {
+  background: #ddd;
+}
+
+.tx {
+  margin-top: 12px;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.tx a {
+  color: #4cafef;
+  text-decoration: none;
+}
+
+.tx a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

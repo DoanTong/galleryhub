@@ -14,6 +14,7 @@ const ProfilePage = React.lazy(() =>
 const SearchPage = React.lazy(() => import("./routes/searchPage/searchPage"));
 const AuthPage = React.lazy(() => import("./routes/authPage/authPage"));
 const MintNFT = React.lazy(() => import("./routes/mintPage/MintNFT"));
+const BuyPage = React.lazy(() => import("./routes/buyPage/BuyPage"))
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/profile/:username" element={<ProfilePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/mint/:id" element={<MintNFT />} />
+              <Route path="/buypage" element={<BuyPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
           </Routes>

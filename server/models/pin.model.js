@@ -1,18 +1,10 @@
-import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
-const pinSchema = new Schema(
+const pinSchema = new mongoose.Schema(
   {
-    media: {
-      type: String,
-      required: true,
-    },
-    width: {
-      type: Number,
-      required: true,
-    },
-    height: {
-      type: Number,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     title: {
@@ -27,16 +19,28 @@ const pinSchema = new Schema(
       type: String,
     },
     board: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Board",
     },
     tags: {
       type: [String],
+      default: [],
     },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+    media: {
+      type: String,
       required: true,
+    },
+    width: Number,
+    height: Number,
+
+    // 👇 Thêm 2 field để lưu thông tin NFT
+    tokenId: {
+      type: String,
+      default: null,
+    },
+    contractAddress: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true }

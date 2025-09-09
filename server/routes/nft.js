@@ -2,6 +2,7 @@ import express from "express";
 import fetch from "node-fetch";
 import NFT from "../models/nft.model.js";
 import Purchase from "../models/purchase.model.js";
+import Pin from "../models/pin.model.js";
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.post("/upload", async (req, res) => {
   }
 });
 
-/** POST /api/nft/mint  (lưu record mint) */
+/** POST /api/nft/mint */
 router.post("/mint", async (req, res) => {
   try {
     const { pinId, tokenId, uri, txHash, minter, ownerWallet } = req.body;
@@ -48,7 +49,7 @@ router.post("/mint", async (req, res) => {
   }
 });
 
-/** GET /api/nft/by-pin/:pinId -> lấy info mint của pin */
+/** GET /api/nft/by-pin/:pinId */
 router.get("/by-pin/:pinId", async (req, res) => {
   try {
     const { pinId } = req.params;
@@ -60,8 +61,7 @@ router.get("/by-pin/:pinId", async (req, res) => {
   }
 });
 
-/** POST /api/nft/buy  (lưu giao dịch mua + đổi owner trong DB Pin nếu muốn) */
-import Pin from "../models/pin.model.js";
+/** POST /api/nft/buy */
 router.post("/buy", async (req, res) => {
   try {
     const { pinId, tokenId, buyerId, amount, txHash } = req.body;
@@ -75,7 +75,7 @@ router.post("/buy", async (req, res) => {
 
     const purchase = await Purchase.create({ pinId, tokenId, buyerId, amount, txHash });
 
-    // Optional: cập nhật 'owner' của Pin sang buyerId (để UI thấy isOwner)
+    // Cập nhật 'owner' của Pin sang buyerId
     await Pin.findByIdAndUpdate(pinId, { user: buyerId });
 
     res.status(201).json(purchase);
@@ -85,13 +85,32 @@ router.post("/buy", async (req, res) => {
   }
 });
 
-/** GET /api/nft/buy?buyerId=... -> danh sách đã mua */
+/** GET /api/nft/buy?buyerId=... -> danh sách đã mua + media info */
 router.get("/buy", async (req, res) => {
   try {
     const { buyerId } = req.query;
     if (!buyerId) return res.status(400).json({ message: "buyerId required" });
+
+    // Lấy purchases
     const purchases = await Purchase.find({ buyerId }).sort({ createdAt: -1 }).lean();
-    res.json(purchases);
+
+    // Enrich với Pin info
+    const enriched = await Promise.all(
+      purchases.map(async (p) => {
+        const pin = await Pin.findById(p.pinId).lean();
+        return {
+          ...p,
+          media: pin?.media || "",
+          width: pin?.width || 372,
+          height: pin?.height || 372,
+          title: pin?.title || "",
+          description: pin?.description || "",
+          owner: pin?.user?._id || pin?.ownerId || null,
+        };
+      })
+    );
+
+    res.json(enriched);
   } catch (err) {
     console.error("getPurchases error:", err);
     res.status(500).json({ message: "Server error" });

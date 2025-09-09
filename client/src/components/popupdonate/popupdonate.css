@@ -53,25 +53,27 @@
 .donateStatus.failed { color:#ef4444; }
 
 .popupButtons {
-  margin-top:20px;
-  display:flex;
-  justify-content:space-between;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* thêm khoảng cách giữa 2 nút */
 }
 
-.confirmBtn {
-  background-color:#10b981;
-  color:#fff;
-  padding:8px 20px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
+.donateConfirmBtn {
+  background-color: #10b981;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
-.closeBtn {
-  background-color:#4b5563;
-  color:#fff;
-  padding:8px 20px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
+.donateCloseBtn {
+  background-color: #4b5563;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
+

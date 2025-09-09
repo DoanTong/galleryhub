@@ -1,0 +1,109 @@
+/* buyPage.css */
+
+.buyPage {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.buyPage h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.purchaseList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.purchaseItem {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.purchaseItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.purchaseItem img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.purchaseInfo {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.purchaseInfo p {
+  margin: 4px 0;
+}
+
+.purchaseInfo a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.purchaseInfo a:hover {
+  text-decoration: underline;
+}
+
+/* Popup overlay */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup content */
+.popupContent {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 95vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.popupContent img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Close button */
+.popupContent button {
+  padding: 6px 12px;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.popupContent button:hover {
+  background-color: #e04344;
+}

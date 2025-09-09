@@ -99,10 +99,10 @@ const PopupDonate = ({ ownerWallet, onClose }) => {
         </div>
 
         <div className="popupButtons">
-          <button onClick={handleDonate} className="confirmBtn">
+          <button onClick={handleDonate} className="donateConfirmBtn">
             Confirm
           </button>
-          <button onClick={onClose} className="closeBtn">
+          <button onClick={onClose} className="donateCloseBtn">
             Cancel
           </button>
         </div>

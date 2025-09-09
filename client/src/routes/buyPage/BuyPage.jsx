@@ -1,11 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import useAuthStore from "../../utils/authStore";
+import GalleryItem from "../../components/galleryItem/galleryItem";
+
+import "./buyPage.css";
 
 const BuyPage = () => {
   const { currentUser } = useAuthStore();
   const [purchases, setPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null); // tranh được click
 
+  // Fetch purchases
   const fetchPurchases = useCallback(async () => {
     if (!currentUser?._id) return;
     setLoading(true);
@@ -37,22 +42,36 @@ const BuyPage = () => {
       <div className="purchaseList">
         {purchases.map((p) => (
           <div key={p._id} className="purchaseItem">
-            <h3>Pin ID: {p.pinId}</h3>
-            <p>Token ID: {p.tokenId}</p>
-            <p>Số tiền: {p.amount} ETH</p>
-            <p>
-              Giao dịch:{" "}
-              <a
-                href={`https://sepolia.etherscan.io/tx/${p.txHash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {p.txHash}
-              </a>
-            </p>
+            <GalleryItem
+              item={p}
+              onPurchase={fetchPurchases}
+              onClick={() => setSelectedItem(p)}
+            />
           </div>
         ))}
       </div>
+
+      {/* Popup chi tiết */}
+      {selectedItem && (
+        <div className="popupOverlay" onClick={() => setSelectedItem(null)}>
+          <div
+            className="popupContent"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3>{selectedItem.title}</h3>
+            <img
+              src={selectedItem.media}
+              alt={selectedItem.title}
+              style={{ maxWidth: "100%", borderRadius: "8px" }}
+            />
+            <p><strong>Pin ID:</strong> {selectedItem.pinId}</p>
+            <p><strong>Token ID:</strong> {selectedItem.tokenId}</p>
+            <p><strong>Amount:</strong> {selectedItem.amount} ETH</p>
+            <p><strong>Tx Hash:</strong> {selectedItem.txHash}</p>
+            <button onClick={() => setSelectedItem(null)}>Đóng</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 require("hardhat-deploy");
 require("dotenv").config();
 require("@nomiclabs/hardhat-ethers");
-
+require("@nomicfoundation/hardhat-verify");
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -18,4 +18,12 @@ module.exports = {
     },
   },
   solidity: "0.8.21",
+  etherscan: {
+    apiKey: {
+      sepolia: process.env.ETHERSCAN_API_KEY, // 🔑 thêm dòng này
+    },
+  },
+  sourcify: {
+    enabled: false, // ẩn cảnh báo Sourcify
+  },
 };

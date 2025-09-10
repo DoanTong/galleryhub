@@ -1,0 +1,38 @@
+/* ===== ForSalePage ===== */
+.forSalePage {
+  padding: 20px;
+}
+
+.forSalePage h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.forSaleList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* ảnh đều nhau */
+  gap: 16px;
+}
+
+.forSaleItem {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.forSaleItem:hover {
+  transform: translateY(-4px);
+}
+
+/* Ảnh trong item */
+.forSaleItem img {
+  width: 100%;
+  height: 220px;            /* cố định chiều cao để ảnh không bị cao quá */
+  object-fit: cover;        /* cắt vừa khung */
+  border-radius: 16px;
+  display: block;
+}

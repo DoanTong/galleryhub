@@ -1,8 +1,13 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\contracts\\access\\AdminRole.sol": {
       "lastModificationDate": 1753112876631,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\access\\AdminRole.sol": {
+      "lastModificationDate": 1757332823333,
+>>>>>>> Stashed changes
       "contentHash": "fdd4594ed56e2e0539940050d60abf95",
       "sourceName": "contracts/access/AdminRole.sol",
       "solcConfig": {
@@ -46,8 +51,13 @@
         "AdminRole"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\contracts\\access\\RoleManager.sol": {
       "lastModificationDate": 1753112630973,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\access\\RoleManager.sol": {
+      "lastModificationDate": 1757332823334,
+>>>>>>> Stashed changes
       "contentHash": "626f1a50508146f4c37a29e2912efecf",
       "sourceName": "contracts/access/RoleManager.sol",
       "solcConfig": {
@@ -91,8 +101,13 @@
         "RoleManager"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\AccessControl.sol": {
       "lastModificationDate": 1753116436476,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\AccessControl.sol": {
+      "lastModificationDate": 1757333871007,
+>>>>>>> Stashed changes
       "contentHash": "d0e2c05f09a3aea7cd299bbd4a435ee2",
       "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
       "solcConfig": {
@@ -138,8 +153,13 @@
         "AccessControl"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
       "lastModificationDate": 1753116436543,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
+      "lastModificationDate": 1757333871105,
+>>>>>>> Stashed changes
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -181,8 +201,13 @@
         "Context"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
       "lastModificationDate": 1753116436598,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
+      "lastModificationDate": 1757333871198,
+>>>>>>> Stashed changes
       "contentHash": "0906d06dca25210d4696dcef6dad2909",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -226,8 +251,13 @@
         "ERC165"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\IAccessControl.sol": {
       "lastModificationDate": 1753116436651,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\IAccessControl.sol": {
+      "lastModificationDate": 1757333871393,
+>>>>>>> Stashed changes
       "contentHash": "def1e8f7b6cac577cf2600655bf3bdf8",
       "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
       "solcConfig": {
@@ -269,8 +299,13 @@
         "IAccessControl"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol": {
       "lastModificationDate": 1753116436665,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol": {
+      "lastModificationDate": 1757333871419,
+>>>>>>> Stashed changes
       "contentHash": "7074c93b1ea0a122063f26ddd1db1032",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -312,10 +347,17 @@
         "IERC165"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol": {
       "lastModificationDate": 1753116436683,
       "contentHash": "f62e11dbd302e17a5621a1438f4e054c",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC165.sol": {
+      "lastModificationDate": 1757333871418,
+      "contentHash": "947853028399b7de34bcc3704ee06e99",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
+>>>>>>> Stashed changes
       "solcConfig": {
         "version": "0.8.21",
         "settings": {
@@ -400,8 +442,13 @@
       ],
       "artifacts": []
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC4906.sol": {
       "lastModificationDate": 1753116436678,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC4906.sol": {
+      "lastModificationDate": 1757333871443,
+>>>>>>> Stashed changes
       "contentHash": "4386d2e9b1578157802062e156bd9ae1",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC4906.sol",
       "solcConfig": {
@@ -446,10 +493,17 @@
         "IERC4906"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC165.sol": {
       "lastModificationDate": 1753116436665,
       "contentHash": "947853028399b7de34bcc3704ee06e99",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC721.sol": {
+      "lastModificationDate": 1757333871451,
+      "contentHash": "6b9716905fb42874ed1769ae7f7458b1",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC721.sol",
+>>>>>>> Stashed changes
       "solcConfig": {
         "version": "0.8.21",
         "settings": {
@@ -489,8 +543,103 @@
       ],
       "artifacts": []
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721URIStorage.sol": {
       "lastModificationDate": 1753116436623,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol": {
+      "lastModificationDate": 1757333871454,
+      "contentHash": "f62e11dbd302e17a5621a1438f4e054c",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.2"
+      ],
+      "artifacts": [
+        "IERC721"
+      ]
+    },
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol": {
+      "lastModificationDate": 1757333871461,
+      "contentHash": "136c64eca25bcb8a68f43ac6605559f9",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.2"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721URIStorage.sol": {
+      "lastModificationDate": 1757333871260,
+>>>>>>> Stashed changes
       "contentHash": "0b00dd0d9f2738855f17aa283bfa3ff5",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {
@@ -538,8 +687,13 @@
         "ERC721URIStorage"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
       "lastModificationDate": 1753116436616,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
+      "lastModificationDate": 1757333871244,
+>>>>>>> Stashed changes
       "contentHash": "522ec023bce510c30dfbf61584f5a190",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -589,8 +743,13 @@
         "ERC721"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
       "lastModificationDate": 1753116436723,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
+      "lastModificationDate": 1757333871527,
+>>>>>>> Stashed changes
       "contentHash": "d8f70caf0e0c77dc908176ed44812fb7",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -636,6 +795,7 @@
         "Strings"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol": {
       "lastModificationDate": 1753116436686,
       "contentHash": "136c64eca25bcb8a68f43ac6605559f9",
@@ -683,6 +843,10 @@
     },
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\draft-IERC6093.sol": {
       "lastModificationDate": 1753116436572,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\draft-IERC6093.sol": {
+      "lastModificationDate": 1757333871154,
+>>>>>>> Stashed changes
       "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
@@ -726,8 +890,13 @@
         "IERC721Errors"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\utils\\ERC721Utils.sol": {
       "lastModificationDate": 1753116436623,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\utils\\ERC721Utils.sol": {
+      "lastModificationDate": 1757333871262,
+>>>>>>> Stashed changes
       "contentHash": "4cefad279a37c895b709bce2b901816e",
       "sourceName": "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol",
       "solcConfig": {
@@ -772,8 +941,101 @@
         "ERC721Utils"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\Math.sol": {
       "lastModificationDate": 1753116436696,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\SignedMath.sol": {
+      "lastModificationDate": 1757333871516,
+      "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
+      "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./SafeCast.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SignedMath"
+      ]
+    },
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\SafeCast.sol": {
+      "lastModificationDate": 1757333871511,
+      "contentHash": "2adca1150f58fc6f3d1f0a0f22ee7cca",
+      "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SafeCast"
+      ]
+    },
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\Math.sol": {
+      "lastModificationDate": 1757333871481,
+>>>>>>> Stashed changes
       "contentHash": "5ec781e33d3a9ac91ffdc83d94420412",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
@@ -818,6 +1080,7 @@
         "Math"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\math\\SignedMath.sol": {
       "lastModificationDate": 1753116436715,
       "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
@@ -908,6 +1171,10 @@
     },
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Panic.sol": {
       "lastModificationDate": 1753116436707,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Panic.sol": {
+      "lastModificationDate": 1757333871500,
+>>>>>>> Stashed changes
       "contentHash": "2133dc13536b4a6a98131e431fac59e1",
       "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
       "solcConfig": {
@@ -949,8 +1216,13 @@
         "Panic"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol": {
       "lastModificationDate": 1753116436688,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol": {
+      "lastModificationDate": 1757333871464,
+>>>>>>> Stashed changes
       "contentHash": "d61660a41ce200e99816e4734f7fd202",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -992,8 +1264,13 @@
         "IERC721Receiver"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
       "lastModificationDate": 1753116436601,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
+      "lastModificationDate": 1757333871212,
+>>>>>>> Stashed changes
       "contentHash": "59dfce11284f2636db261df9b6a18f81",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
@@ -1040,8 +1317,13 @@
         "ERC20"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
       "lastModificationDate": 1753116436670,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
+      "lastModificationDate": 1757333871427,
+>>>>>>> Stashed changes
       "contentHash": "9261adf6457863de3e9892f51317ec89",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
@@ -1083,8 +1365,13 @@
         "IERC20"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
       "lastModificationDate": 1753116436671,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
+      "lastModificationDate": 1757333871429,
+>>>>>>> Stashed changes
       "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
@@ -1128,8 +1415,13 @@
         "IERC20Metadata"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
       "lastModificationDate": 1753116436702,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
+      "lastModificationDate": 1757333871494,
+>>>>>>> Stashed changes
       "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -1173,6 +1465,7 @@
         "Ownable"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\GalleryHub\\contracts\\contracts\\core\\GalleryToken.sol": {
       "lastModificationDate": 1753091421278,
       "contentHash": "ec31affee0a6b225e5570a0415ba5c60",
@@ -2528,6 +2821,10 @@
     },
     "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\core\\GalleryToken.sol": {
       "lastModificationDate": 1753246294072,
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\core\\GalleryToken.sol": {
+      "lastModificationDate": 1757332823335,
+>>>>>>> Stashed changes
       "contentHash": "27e52669d95c9e490ae540232ffbf29a",
       "sourceName": "contracts/core/GalleryToken.sol",
       "solcConfig": {
@@ -2572,9 +2869,61 @@
         "GalleryToken"
       ]
     },
+<<<<<<< Updated upstream
     "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\core\\GalleryNFT.sol": {
       "lastModificationDate": 1753242893042,
       "contentHash": "6dfdd02db70275d9d2448a181788c888",
+=======
+    "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\core\\GalleryBuy.sol": {
+      "lastModificationDate": 1757481264406,
+      "contentHash": "6389129db6f02922d9fd2ab6ac7d92ca",
+      "sourceName": "contracts/core/GalleryBuy.sol",
+      "solcConfig": {
+        "version": "0.8.21",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "GalleryBuy"
+      ]
+    },
+    "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\core\\GalleryNFT.sol": {
+      "lastModificationDate": 1757352463845,
+      "contentHash": "cebd8ff3189c328a2bf8d08f1c00cda8",
+>>>>>>> Stashed changes
       "sourceName": "contracts/core/GalleryNFT.sol",
       "solcConfig": {
         "version": "0.8.21",
@@ -2620,7 +2969,11 @@
       ]
     },
     "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\access\\ArtistRole.sol": {
+<<<<<<< Updated upstream
       "lastModificationDate": 1753242893041,
+=======
+      "lastModificationDate": 1757332823334,
+>>>>>>> Stashed changes
       "contentHash": "9fc0b17a595a547503d0b0fa4e120bdf",
       "sourceName": "contracts/access/ArtistRole.sol",
       "solcConfig": {
@@ -2665,6 +3018,7 @@
       ]
     },
     "C:\\Users\\sondo\\galleryhub\\contracts\\contracts\\interfaces\\IGalleryNFT.sol": {
+<<<<<<< Updated upstream
       "lastModificationDate": 1753242893042,
       "contentHash": "b4c1f5ddba3a0deecb758ec607a03b84",
       "sourceName": "contracts/interfaces/IGalleryNFT.sol",
@@ -4019,6 +4373,9 @@
     },
     "C:\\Users\\sondo\\full-stack-pinterest\\contracts\\contracts\\interfaces\\IGalleryNFT.sol": {
       "lastModificationDate": 1753242893042,
+=======
+      "lastModificationDate": 1757332823336,
+>>>>>>> Stashed changes
       "contentHash": "b4c1f5ddba3a0deecb758ec607a03b84",
       "sourceName": "contracts/interfaces/IGalleryNFT.sol",
       "solcConfig": {

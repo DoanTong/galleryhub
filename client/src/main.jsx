@@ -14,7 +14,12 @@ const ProfilePage = React.lazy(() =>
 const SearchPage = React.lazy(() => import("./routes/searchPage/searchPage"));
 const AuthPage = React.lazy(() => import("./routes/authPage/authPage"));
 const MintNFT = React.lazy(() => import("./routes/mintPage/MintNFT"));
+<<<<<<< Updated upstream
 
+=======
+const BuyPage = React.lazy(() => import("./routes/buyPage/BuyPage"));
+const ForSalePage = React.lazy(() => import("./routes/forsalePage/forsalePage"));
+>>>>>>> Stashed changes
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
@@ -33,6 +38,11 @@ createRoot(document.getElementById("root")).render(
               <Route path="/profile/:username" element={<ProfilePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/mint/:id" element={<MintNFT />} />
+<<<<<<< Updated upstream
+=======
+              <Route path="/buypage" element={<BuyPage />} />
+              <Route path="/forsale" element={<ForSalePage />} />
+>>>>>>> Stashed changes
             </Route>
             <Route path="/auth" element={<AuthPage />} />
           </Routes>

@@ -10,9 +10,48 @@ import "./GalleryItem.css";
 import PopupDonate from "../popupdonate/popupdonate";
 import PopupBuy from "../../routes/popupBuy/PopupBuy.jsx";
 
+// ========== Config ==========
 const BUY_CONTRACT_ADDRESS = "0xe3a97B766CCE5fe22b1430f0746A8741d418b3B7";
 const NFT_CONTRACT_ADDRESS = "0x53041DD98e5A6deacB81DCfef2B7ce4B05027C25";
 
+// ========== PopupSetPrice ==========
+const PopupSetPrice = ({ onClose, onConfirm }) => {
+  const [price, setPrice] = useState("");
+
+  const handleConfirm = () => {
+    if (!price || isNaN(price) || Number(price) <= 0) {
+      alert("Vui lòng nhập giá hợp lệ!");
+      return;
+    }
+    onConfirm(price);
+  };
+
+  return ReactDOM.createPortal(
+    <div className="popupOverlay">
+      <div className="popupContent">
+        <h3>Đặt giá bán NFT</h3>
+        <input
+          type="number"
+          placeholder="Nhập giá ETH"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="priceInput"
+        />
+        <div className="popupActions">
+          <button onClick={handleConfirm} className="confirmBtn">
+            Xác nhận
+          </button>
+          <button onClick={onClose} className="cancelBtn">
+            Hủy
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+};
+
+// ========== GalleryItem ==========
 const GalleryItem = ({ item, onDelete, onPurchase }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(null);
@@ -22,12 +61,31 @@ const GalleryItem = ({ item, onDelete, onPurchase }) => {
 
   const [donatePopupOpen, setDonatePopupOpen] = useState(false);
   const [buyPopupOpen, setBuyPopupOpen] = useState(false);
+  const [setPricePopupOpen, setSetPricePopupOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
 
   const optimizedHeight = (372 * item.height) / item.width;
   const ownerId = item.user?._id || item.owner || item.ownerId;
   const isOwner = currentUser ? String(currentUser._id) === String(ownerId) : false;
   const isMinted = !!item.tokenId;
+
+  // Kiểm tra trạng thái approve
+  useEffect(() => {
+    const checkApproved = async () => {
+      if (!window.ethereum || !isMinted) return;
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const nftContract = new ethers.Contract(NFT_CONTRACT_ADDRESS, nftContractABI.abi, provider);
+
+        const approvedAddress = await nftContract.getApproved(item.tokenId);
+        setIsApproved(approvedAddress?.toLowerCase() === BUY_CONTRACT_ADDRESS.toLowerCase());
+      } catch (err) {
+        console.error("Check approve error:", err);
+      }
+    };
+    checkApproved();
+  }, [isMinted, item.tokenId]);
 
   // Dropdown menu
   const toggleDropdown = () => {
@@ -77,9 +135,10 @@ const GalleryItem = ({ item, onDelete, onPurchase }) => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const nftContract = new ethers.Contract(NFT_CONTRACT_ADDRESS, nftContractABI.abi, signer);
-        const tx = await nftContract.setApprovalForAll(BUY_CONTRACT_ADDRESS, true);
+        const tx = await nftContract.approve(BUY_CONTRACT_ADDRESS, item.tokenId);
         await tx.wait();
         alert("Đã phê duyệt hợp đồng mua!");
+        setIsApproved(true);
       } catch (err) {
         console.error("Approve error:", err);
         alert(`Phê duyệt thất bại! ${err.reason || err.message || ""}`);
@@ -87,39 +146,66 @@ const GalleryItem = ({ item, onDelete, onPurchase }) => {
         setLoading(false);
       }
     } else if (action === "ListForSale") {
-      if (!window.ethereum) return alert("Vui lòng cài đặt MetaMask!");
-      try {
-        setLoading(true);
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const buyContract = new ethers.Contract(BUY_CONTRACT_ADDRESS, contractABI.abi, signer);
-        const priceInWei = ethers.parseEther("0.005");
-        const currentPrice = await buyContract.prices(NFT_CONTRACT_ADDRESS, item.tokenId);
-        if (currentPrice > 0) {
-          alert(`NFT đã được liệt kê với giá ${ethers.formatEther(currentPrice)} ETH!`);
-          setLoading(false);
-          return;
-        }
-        const tx = await buyContract.setPrice(NFT_CONTRACT_ADDRESS, item.tokenId, priceInWei);
-        await tx.wait();
-        alert("Đã liệt kê NFT để bán với giá 0.005 ETH!");
-      } catch (err) {
-        console.error("List error:", err);
-        alert(`Liệt kê thất bại! ${err.reason || err.message || ""}`);
-      } finally {
-        setLoading(false);
-      }
+      setSetPricePopupOpen(true);
     }
   };
 
-  // Menu items
+  // Xác nhận giá NFT và lưu vào backend
+  const handleConfirmSetPrice = async (priceEth) => {
+    setSetPricePopupOpen(false);
+    if (!window.ethereum) return alert("Vui lòng cài đặt MetaMask!");
+    try {
+      setLoading(true);
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const buyContract = new ethers.Contract(BUY_CONTRACT_ADDRESS, contractABI.abi, signer);
+
+      const priceInWei = ethers.parseEther(priceEth.toString());
+      const currentPrice = await buyContract.prices(NFT_CONTRACT_ADDRESS, item.tokenId);
+      if (currentPrice > 0n) {
+        alert(`NFT đã được liệt kê với giá ${ethers.formatEther(currentPrice)} ETH!`);
+        setLoading(false);
+        return;
+      }
+
+      const tx = await buyContract.setPrice(NFT_CONTRACT_ADDRESS, item.tokenId, priceInWei);
+      await tx.wait();
+
+      // --- Lưu vào backend ---
+      await fetch(`${import.meta.env.VITE_API_ENDPOINT}/forsale`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          pinId: item._id,
+          tokenId: item.tokenId,
+          contractAddress: NFT_CONTRACT_ADDRESS,
+          ownerId: currentUser._id,
+          price: priceEth,
+        }),
+      });
+
+      alert(`Đã liệt kê NFT để bán với giá ${priceEth} ETH!`);
+    } catch (err) {
+      console.error("List error:", err);
+      alert(`Liệt kê thất bại! ${err.reason || err.message || ""}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Menu items logic
   let menuItems = [];
   if (isOwner) {
     if (!isMinted) menuItems = ["Edit", "Delete", "MintNFT"];
-    else menuItems = ["Edit", "Delete", "ApproveForSale", "ListForSale"];
+    else {
+      menuItems = ["Edit", "Delete"];
+      if (!isApproved) menuItems.push("ApproveForSale");
+      else menuItems.push("ListForSale");
+    }
   } else {
     menuItems = ["Donate", "Report"];
-    if (isMinted) menuItems.unshift("Buy");
+    if (isMinted && isApproved) menuItems.unshift("Buy");
   }
 
   // Dropdown portal
@@ -142,7 +228,6 @@ const GalleryItem = ({ item, onDelete, onPurchase }) => {
     <div className="galleryItem" style={{ gridRowEnd: `span ${Math.ceil(item.height / 100)}` }}>
       <Image path={item.media} alt="" w={372} h={optimizedHeight} />
       <Link to={`/pin/${item._id}`} className="overlay" />
-      <button className="saveButton">Save</button>
 
       <div className="overlayIcons">
         <button>
@@ -155,19 +240,9 @@ const GalleryItem = ({ item, onDelete, onPurchase }) => {
 
       {dropdown}
 
-      {donatePopupOpen && (
-        <PopupDonate ownerWallet={item.user?.walletAddress} onClose={() => setDonatePopupOpen(false)} />
-      )}
-
-      {buyPopupOpen && isMinted && (
-        <PopupBuy
-          pinId={item._id}
-          tokenId={item.tokenId}
-          ownerWallet={item.user?.walletAddress}
-          onClose={() => setBuyPopupOpen(false)}
-          onPurchase={onPurchase} // callback refresh BuyPage
-        />
-      )}
+      {donatePopupOpen && <PopupDonate ownerWallet={item.user?.walletAddress} onClose={() => setDonatePopupOpen(false)} />}
+      {buyPopupOpen && isMinted && <PopupBuy pinId={item._id} tokenId={item.tokenId} ownerWallet={item.user?.walletAddress} onClose={() => setBuyPopupOpen(false)} onPurchase={onPurchase} />}
+      {setPricePopupOpen && <PopupSetPrice onClose={() => setSetPricePopupOpen(false)} onConfirm={handleConfirmSetPrice} />}
     </div>
   );
 };

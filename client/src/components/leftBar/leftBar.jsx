@@ -15,11 +15,16 @@ const LeftBar = () => {
         <Link to="/create" className="menuIcon">
           <Image path="/general/create.svg" alt="" />
         </Link>
-        <Link to="/" className="menuIcon">
-          <Image path="/general/updates.svg" alt="" />
+
+
+        <Link to="/forsale" className="menuIcon">
+          <Image path="/general/shopping-cart-arrow-down.svg" alt="" />
         </Link>
+
+
+
         <Link to="/buypage" className="menuIcon">
-          <Image path="/general/messages.svg" alt="" />
+          <Image path="/general/twotone-collections.svg" alt="" />
         </Link>
       </div>
       <Link to="/" className="menuIcon">

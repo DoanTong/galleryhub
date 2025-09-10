@@ -14,15 +14,14 @@ const ProfilePage = React.lazy(() =>
 const SearchPage = React.lazy(() => import("./routes/searchPage/searchPage"));
 const AuthPage = React.lazy(() => import("./routes/authPage/authPage"));
 const MintNFT = React.lazy(() => import("./routes/mintPage/MintNFT"));
-const BuyPage = React.lazy(() => import("./routes/buyPage/BuyPage"))
-
+const BuyPage = React.lazy(() => import("./routes/buyPage/BuyPage"));
+const ForSalePage = React.lazy(() => import("./routes/forsalePage/forsalePage"));
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {/* Suspense phải bọc toàn bộ Routes */}
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route element={<MainLayout />}>
@@ -35,6 +34,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/search" element={<SearchPage />} />
               <Route path="/mint/:id" element={<MintNFT />} />
               <Route path="/buypage" element={<BuyPage />} />
+              <Route path="/forsale" element={<ForSalePage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
           </Routes>

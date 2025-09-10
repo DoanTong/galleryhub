@@ -10,34 +10,54 @@ const NFT_CONTRACT_ADDRESS = "0x53041DD98e5A6deacB81DCfef2B7ce4B05027C25";
 
 const PopupBuy = ({ pinId, tokenId, ownerWallet, onClose, onPurchase }) => {
   const { currentUser } = useAuthStore();
-  const [price, setPrice] = useState("0.01");
+  const [price, setPrice] = useState(null);
   const [loading, setLoading] = useState(false);
   const [txHash, setTxHash] = useState("");
 
+  // ✅ fetch giá từ blockchain khi popup mở
   useEffect(() => {
-    console.log("PopupBuy props:", { pinId, tokenId, ownerWallet });
-  }, [pinId, tokenId, ownerWallet]);
-
-  const handlePriceChange = (e) => {
-    const value = e.target.value;
-    if (value === "" || (!isNaN(value) && parseFloat(value) >= 0)) {
-      setPrice(value);
-    }
-  };
+    const fetchPrice = async () => {
+      if (!window.ethereum || !tokenId) return;
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const contract = new ethers.Contract(
+          BUY_CONTRACT_ADDRESS,
+          contractABI.abi,
+          provider
+        );
+        const priceWei = await contract.prices(NFT_CONTRACT_ADDRESS, tokenId);
+        const priceEth = ethers.formatEther(priceWei);
+        setPrice(priceEth);
+      } catch (err) {
+        console.error("Fetch price error:", err);
+        setPrice(null);
+      }
+    };
+    fetchPrice();
+  }, [tokenId]);
 
   const handleBuy = async () => {
     if (!window.ethereum) return alert("Vui lòng cài đặt MetaMask!");
     if (!currentUser?._id) return alert("Bạn cần đăng nhập để mua NFT!");
+    if (!price) return alert("Không tìm thấy giá NFT trên blockchain!");
 
     try {
       setLoading(true);
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contract = new ethers.Contract(BUY_CONTRACT_ADDRESS, contractABI.abi, signer);
-      const nftContract = new ethers.Contract(NFT_CONTRACT_ADDRESS, nftContractABI.abi, signer);
+      const contract = new ethers.Contract(
+        BUY_CONTRACT_ADDRESS,
+        contractABI.abi,
+        signer
+      );
+      const nftContract = new ethers.Contract(
+        NFT_CONTRACT_ADDRESS,
+        nftContractABI.abi,
+        signer
+      );
       const userAddress = await signer.getAddress();
 
-      // Kiểm tra owner
+      // ✅ Kiểm tra owner hiện tại
       const currentOwner = await nftContract.ownerOf(tokenId);
       if (userAddress.toLowerCase() === currentOwner.toLowerCase()) {
         alert("Bạn không thể mua NFT của chính mình!");
@@ -45,13 +65,13 @@ const PopupBuy = ({ pinId, tokenId, ownerWallet, onClose, onPurchase }) => {
         return;
       }
 
-      // Gọi contract mua
+      // ✅ Gọi contract để mua, gửi đúng giá owner đã set
       const tx = await contract.buyNFT(NFT_CONTRACT_ADDRESS, Number(tokenId), {
-        value: ethers.parseEther(price),
+        value: ethers.parseEther(price.toString()),
       });
       const receipt = await tx.wait();
 
-      // Lưu giao dịch vào backend
+      // ✅ Gửi thông tin giao dịch về backend
       await fetch(`${import.meta.env.VITE_API_ENDPOINT}/nft/buy`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -66,12 +86,13 @@ const PopupBuy = ({ pinId, tokenId, ownerWallet, onClose, onPurchase }) => {
       });
 
       alert("Mua thành công!");
-      onPurchase?.(); // refresh BuyPage
+      onPurchase?.();
       onClose?.();
       setTxHash(receipt.hash);
     } catch (err) {
       console.error("Buy error:", err);
-      alert(`Mua thất bại! ${err.reason || err.message || ""}`);
+      // alert(`Mua thất bại! ${err.reason || err.message || ""}`);
+      alert(`Bạn không đủ tiền trong MetaMask!!!`);
     } finally {
       setLoading(false);
     }
@@ -83,22 +104,13 @@ const PopupBuy = ({ pinId, tokenId, ownerWallet, onClose, onPurchase }) => {
         <h3>Mua NFT</h3>
         <p>Owner (ví): {ownerWallet || "-"}</p>
         <p>Token ID: {tokenId}</p>
-
-        <label className="popupBuy__label">
-  Số ETH:
-  <input
-    className="popupBuy__input"
-    type="number"
-    step="0.001"
-    min="0"
-    value={price}
-    onChange={handlePriceChange}
-    placeholder="Nhập số ETH (ví dụ: 0.01)"
-  />
-</label>
+        <p>
+          Giá:{" "}
+          {price !== null ? `${price} ETH` : "Đang tải... hoặc chưa được set"}
+        </p>
 
         <div className="popupBuy__actions">
-          <button onClick={handleBuy} disabled={loading}>
+          <button onClick={handleBuy} disabled={loading || !price}>
             {loading ? "Đang xử lý..." : "BUY"}
           </button>
           <button onClick={onClose}>Đóng</button>

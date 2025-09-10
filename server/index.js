@@ -12,20 +12,20 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import donationRoutes from "./routes/donation.route.js";
 import nftRoutes from "./routes/nft.js";
+import forsaleRouter from "./routes/forsale.route.js";
 const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use(fileUpload());
-
 app.use("/api/users", userRouter);
 app.use("/api/pins", pinRouter);
 app.use("/api/comments", commentRouter);
 app.use("/api/boards", boardRouter);
 app.use("/api/donations", donationRoutes);
 app.use("/api/nft", nftRoutes);
-
+app.use("/api/forsale", forsaleRouter);
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
 

@@ -34,3 +34,9 @@
   width: 24px;
   height: 24px;
 }
+
+.menuIcon img {
+  width: 20px; 
+  height: 20px;
+  object-fit: contain;
+}

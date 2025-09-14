@@ -99,11 +99,14 @@ VITE_GALLERYNFT_ADDRESS=0xNewDeployedNFTAddress
 VITE_GALLERYBUY_ADDRESS=0xNewDeployedBuyAddress
 
 5. Cấu trúc dự án
+   
 ├── client       # Frontend React (Vite)
+
 ├── server       # Backend Express + MongoDB
+
 └── contracts    # Smart Contracts (Hardhat)
 
-6. Tài liệu tham khảo
+7. Tài liệu tham khảo
 
 Vite
 

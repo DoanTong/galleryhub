@@ -16,6 +16,8 @@ MetaMask (kết nối blockchain testnet Sepolia)
 Hardhat (triển khai smart contract)
 
 2. Cấu hình file .env
+
+   
 🔹 Server (/server/.env)
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/galleryhub

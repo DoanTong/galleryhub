@@ -20,17 +20,33 @@ Hardhat (triển khai smart contract)
    
 🔹 Server (/server/.env)
 PORT=5000
+
 MONGO_URI=mongodb://localhost:27017/galleryhub
+
 JWT_SECRET=your_jwt_secret
 
+PINATA_JWT=your_jwt_pinata
+
+IK_URL_ENDPOINT=https://ik.imagekit.io/rmq6ftld0
+
+IK_PUBLIC_KEY=public_0E/9aJtIGCgs2RHqu3VqKrUHH1E=
+
+IK_PRIVATE_KEY=private_Wid2Rp3fc5QOx1j+IofwxX9oXaA=
+
 🔹 Client (/client/.env)
+
 VITE_API_URL=http://localhost:5000
-VITE_GALLERYNFT_ADDRESS=0xYourNFTContractAddress
+
+NFT_CONTRACT_ADDRESS=0xYourNFTContractAddress
+
 VITE_GALLERYBUY_ADDRESS=0xYourBuyContractAddress
 
 🔹 Contracts (/contracts/.env)
+
 PRIVATE_KEY=your_wallet_private_key
+
 SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/your_project_id
+
 ETHERSCAN_API_KEY=your_etherscan_key
 
 
